@@ -574,7 +574,7 @@ Text* Text::append(uint8_t c) {
 	return this;
 }
 
-Text* Text::append(char* c) {
+Text* Text::append(const char* c) {
 	int i, len;
 	len = std::strlen(c);
 	for (i = 0; i < len; i++) {

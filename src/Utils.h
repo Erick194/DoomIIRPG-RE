@@ -6,6 +6,7 @@
 #include <zlib.h>
 #include "Image.h"
 
+/*
 typedef unsigned char   uint8_t;
 typedef unsigned long DWORD_PTR;
 #define BYTE		uint8_t
@@ -28,6 +29,7 @@ typedef unsigned long DWORD_PTR;
 #define WORD5(x)   WORDn(x,  5)
 #define WORD6(x)   WORDn(x,  6)
 #define WORD7(x)   WORDn(x,  7)
+*/
 
 
 bool getFileMD5Hash(void* data, uint64_t numBytes, uint64_t& hashWord1, uint64_t& hashWord2);

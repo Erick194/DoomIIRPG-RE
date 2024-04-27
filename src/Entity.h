@@ -49,7 +49,7 @@ public:
 	bool aiIsValidGoal();
 	bool aiIsAttackValid();
 	void aiThink(bool b);
-	static bool Entity::CheckWeaponMask(char n1, int n2) {
+	static bool CheckWeaponMask(char n1, int n2) {
 		return (1 << n1 & n2);
 	}
 	int aiWeaponForTarget(Entity* entity);
@@ -74,8 +74,8 @@ public:
 	bool isDroppedEntity();
 	bool isBinaryEntity(int* array);
 	bool isNamedEntity(int* array);
-	void Entity::saveState(OutputStream* OS, int n);
-	void Entity::loadState(InputStream* IS, int n);
+	void saveState(OutputStream* OS, int n);
+	void loadState(InputStream* IS, int n);
 	int getSaveHandle(bool b);
 	void restoreBinaryState(int n);
 	short getIndex();

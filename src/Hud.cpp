@@ -949,7 +949,7 @@ void Hud::drawBubbleText(Graphics* graphics) {
 	int n2 = app->canvas->SCR_CX + 5;
 	int n3 = 0;
 	int n4 = 6;
-	switch (this->bubbleColor) {
+	switch ((unsigned int)this->bubbleColor) {
 		case 0xFF800000: {
 			n3 = 0;
 			break;
@@ -962,7 +962,7 @@ void Hud::drawBubbleText(Graphics* graphics) {
 			n3 = 20;
 			break;
 		}
-		case Canvas::PLAYER_DLG_COLOR: {
+		case (unsigned int)Canvas::PLAYER_DLG_COLOR: {
 			n3 = 30;
 			n4 = 12;
 			break;

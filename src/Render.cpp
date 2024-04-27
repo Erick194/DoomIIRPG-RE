@@ -3081,7 +3081,7 @@ void Render::postProcessView(Graphics* graphics) {
 	if (this->vScrollVelocity != 0) {
 		int screenVScrollOffset2 = this->screenVScrollOffset;
 		int n = -(5 * (app->time - this->lastScrollChangeTime)) / 30;
-		if (this - vScrollVelocity + n < 0) {
+		if (this->vScrollVelocity + n < 0) {
 			if (app->tinyGL->viewportHeight - screenVScrollOffset2 <= 15 || screenVScrollOffset2 <= 15) {
 				screenVScrollOffset2 = 0;
 				this->vScrollVelocity = 0;

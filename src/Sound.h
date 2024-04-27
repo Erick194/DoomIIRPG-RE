@@ -28,7 +28,7 @@ private:
 
 public:
 
-	class Sound::SoundStream
+	class SoundStream
 	{
 	public:
 		ALuint bufferId;

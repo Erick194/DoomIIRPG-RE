@@ -244,7 +244,7 @@ void gles::CreateFadeTexture(int mediaID) {
 		assert(ct != &activeChain);
 		//__assert_rtn("CreateFadeTexture", "/Users/greghodges/doom2rpg/trunk/Doom2rpg_iphone/xcode/Classes/GLES.cpp", 366, "ct != &activeChain");
 
-		printf("Freeing media ID %i, %ix%i\n", (int)((int)ct - (int)this->chains) / sizeof(glChain), ct->width, ct->height);
+		printf("Freeing media ID %i, %ix%i\n", (int)((intptr_t)ct - (intptr_t)this->chains) / sizeof(glChain), ct->width, ct->height);
 		ct->next->prev = ct->prev;
 		ct->prev->next = ct->next;
 		ct->prev = NULL;
@@ -270,7 +270,7 @@ void gles::CreateFadeTexture(int mediaID) {
 	ct->prev->next = ct;
 	ct->width = FADE_WIDTH;
 	ct->height = FADE_HEIGHT;
-	printf("Allocating media ID %i, %ix%i, activeTexels = %3.1f meg\n", (int)((int)ct - (int)this->chains) / sizeof(glChain), ct->width, ct->height, BYTES_TO_MEGABYTES(this->activeTexels));
+	printf("Allocating media ID %i, %ix%i, activeTexels = %3.1f meg\n", (int)((intptr_t)ct - (intptr_t)this->chains) / sizeof(glChain), ct->width, ct->height, BYTES_TO_MEGABYTES(this->activeTexels));
 
 	glGenTextures(1, &ct->texnum);
 	glBindTexture(GL_TEXTURE_2D, ct->texnum);
@@ -1066,7 +1066,7 @@ void gles::CreateTextureForMediaID(int n, int mediaID, bool b) {
 		assert(ct != &activeChain);
 		//__assert_rtn("CreateTextureForMediaID","/Users/greghodges/doom2rpg/trunk/Doom2rpg_iphone/xcode/Classes/GLES.cpp", 753,"ct != &activeChain");
 
-		printf ("Freeing media ID %i, %ix%i\n", (int)((int)ct - (int)this->chains) / sizeof(glChain), ct->width, ct->height);
+		printf ("Freeing media ID %i, %ix%i\n", (int)((intptr_t)ct - (intptr_t)this->chains) / sizeof(glChain), ct->width, ct->height);
 
 		next = ct->next;
 		next->prev = ct->prev;
@@ -1096,7 +1096,7 @@ void gles::CreateTextureForMediaID(int n, int mediaID, bool b) {
 	ct->prev->next = ct;
 	ct->width = width;
 	ct->height = height;
-	printf("Allocating media ID %i, %ix%i, activeTexels = %3.1f meg\n", (int)((int)ct - (int)this->chains) / sizeof(glChain), width, height, BYTES_TO_MEGABYTES(this->activeTexels));
+	printf("Allocating media ID %i, %ix%i, activeTexels = %3.1f meg\n", (int)((intptr_t)ct - (intptr_t)this->chains) / sizeof(glChain), width, height, BYTES_TO_MEGABYTES(this->activeTexels));
 
 	glGenTextures(1, &ct->texnum);
 	glBindTexture(GL_TEXTURE_2D, ct->texnum);

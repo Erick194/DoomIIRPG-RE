@@ -1,6 +1,9 @@
 #ifndef __ENTITYMONSTER_H__
 #define __ENTITYMONSTER_H__
 
+#include <cstring>
+#include <stdint.h>
+
 #include "CombatEntity.h"
 class OutputStream;
 class InputStream;

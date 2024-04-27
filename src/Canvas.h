@@ -585,20 +585,20 @@ public:
 	
 	void disposeCharacterSelection();
 
-	bool Canvas::pitchIsControlled(int n, int n2, int n3);
-	int Canvas::touchToKey_Play(int pressX, int pressY);
-	bool Canvas::startArmorRepair(ScriptThread* armorRepairThread);
-	void Canvas::endArmorRepair();
+	bool pitchIsControlled(int n, int n2, int n3);
+	int touchToKey_Play(int pressX, int pressY);
+	bool startArmorRepair(ScriptThread* armorRepairThread);
+	void endArmorRepair();
 	
-	void Canvas::drawTouchSoftkeyBar(Graphics* graphics, bool highlighted_Left, bool highlighted_Right);
-	void Canvas::touchSwipe(int swDir);
+	void drawTouchSoftkeyBar(Graphics* graphics, bool highlighted_Left, bool highlighted_Right);
+	void touchSwipe(int swDir);
 
 	
-	void Canvas::turnEntityIntoWaterSpout(Entity* entity);
-	void Canvas::flipControls();
-	void Canvas::setControlLayout();
-	void Canvas::evaluateMiniGameResults(int n);
-	void Canvas::addEvents(int event); // [GEC]
+	void turnEntityIntoWaterSpout(Entity* entity);
+	void flipControls();
+	void setControlLayout();
+	void evaluateMiniGameResults(int n);
+	void addEvents(int event); // [GEC]
 };
 
 #endif

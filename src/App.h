@@ -1,6 +1,9 @@
 #ifndef __APP_H__
 #define __APP_H__
 
+#include <cstring>
+#include <stdint.h>
+
 #include "IDIB.h"
 
 class SDLGL;
@@ -129,10 +132,10 @@ public:
 	uint32_t nextByte();
 	void setFontRenderMode(int fontRenderMode);
 
-	void Applet::AccelerometerUpdated(float x, float y, float z);
-	void Applet::StartAccelerometer();
-	void Applet::StopAccelerometer();
-	void Applet::CalcAccelerometerAngles();
+	void AccelerometerUpdated(float x, float y, float z);
+	void StartAccelerometer();
+	void StopAccelerometer();
+	void CalcAccelerometerAngles();
 };
 
 

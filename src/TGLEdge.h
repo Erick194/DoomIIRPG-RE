@@ -1,6 +1,8 @@
 #ifndef __TGLEDGE_H__
 #define __TGLEDGE_H__
 
+#include <stdint.h>
+
 class TGLVert;
 
 class TGLEdge

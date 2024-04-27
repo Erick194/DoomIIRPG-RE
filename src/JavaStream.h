@@ -1,6 +1,8 @@
 #ifndef __JAVASTREAM_H__
 #define __JAVASTREAM_H__
 
+#include <stdint.h>
+
 #define LT_RESOURCE 5
 #define LT_FILE		6
 #define LT_SOUND_RESOURCE	7 // [GEC]

@@ -115,7 +115,7 @@ public:
 	void setCharAt(char c, int i);
 	Text* append(char c);
 	Text* append(uint8_t c);
-	Text* append(char* c);
+	Text* append(const char* c);
 	Text* append(int i);
 	Text* append(Text* t);
 	Text* append(Text* t, int i);
