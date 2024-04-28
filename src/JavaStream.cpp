@@ -80,6 +80,7 @@ bool InputStream::loadFile(const char* fileName, int loadType) {
 			}
 
 			std::fclose(this->file);
+			this->file = nullptr;
 			return true;
 		}
 		else {

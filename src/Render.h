@@ -407,8 +407,8 @@ public:
 	void renderFloaterAnim(int n, int frame, int x, int y, int z, int tileNum, int flags, int renderMode, int scaleFactor, int renderFlags);
 	void renderSpecialBossAnim(int n, int frame, int x, int y, int z, int tileNum, int flags, int renderMode, int scaleFactor, int renderFlags);
 	
-	void Render::postProcessSprites();
-	void Render::handleMonsterIdleSounds(Entity* entity);
+	void postProcessSprites();
+	void handleMonsterIdleSounds(Entity* entity);
 	
 	void Render3dScene(void);
 	void fixTexels(int offset, int i, int mediaID, int* rowHeight); // [GEC] New

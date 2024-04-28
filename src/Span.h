@@ -1,6 +1,7 @@
 #ifndef __SPAN_H__
 #define __SPAN_H__
 #include <stdexcept>
+#include <stdint.h>
 
 class TinyGL;
 

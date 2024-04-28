@@ -3,6 +3,8 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <cstring>
+#include <stdint.h>
 #include <zlib.h>
 
 #define ZIP_LOCAL_FILE_SIG 0x04034b50

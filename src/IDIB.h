@@ -1,6 +1,8 @@
 #ifndef __IDIB_H__
 #define __IDIB_H__
 
+#include <stdint.h>
+
 class IDIB
 {
 private:

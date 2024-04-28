@@ -167,7 +167,7 @@ public:
 	void cleanUpAttack();
 	void updateProjectile();
 	void launchProjectile();
-	GameSprite* Combat::allocMissile(int n, int n2, int n3, int n4, int n5, int n6, int duration, int n7);
+	GameSprite* allocMissile(int n, int n2, int n3, int n4, int n5, int n6, int duration, int n7);
 	void launchSoulCube();
 	int getWeaponTileNum(int n);
 

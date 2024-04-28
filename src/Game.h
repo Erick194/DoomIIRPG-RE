@@ -287,9 +287,9 @@ public:
 
     void cleanUpCamMemory();
 
-    const char* Game::GetSaveFile(int i, int i2);
-    char* Game::getProfileSaveFileName(const char* name);
-    int Game::getMonsterSound(int eSubType, int param, int soundType);
+    const char* GetSaveFile(int i, int i2);
+    char* getProfileSaveFileName(const char* name);
+    int getMonsterSound(int eSubType, int param, int soundType);
 };
 
 #endif
