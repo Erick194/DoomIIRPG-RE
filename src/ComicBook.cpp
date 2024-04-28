@@ -503,7 +503,7 @@ void ComicBook::DrawImage(Image* image, int a3, int a4, char a5, float alpha, ch
     float st[8]; // [sp+34h] [bp-4Ch] BYREF
 
     this->CheckImageExistence(image);
-    v10 = (unsigned __int8)a5;
+    v10 = (uint8_t)a5;
     width = (float)image->width;
     height = (float)image->height;
     if (a5)

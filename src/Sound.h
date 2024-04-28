@@ -33,8 +33,8 @@ public:
 	public:
 		ALuint bufferId;
 		ALuint sourceId;
-		__int16 resID;
-		__int16 priority;
+		int16_t resID;
+		int16_t priority;
 		bool fadeInProgress;
 		uint8_t field_0xd;
 		uint8_t field_0xe;
@@ -88,13 +88,13 @@ public:
 	bool openAL_LoadAllSounds();
 
 	bool cacheSounds();
-	void playSound(__int16 resID, unsigned __int8 flags, int priority, bool a5);
+	void playSound(int16_t resID, uint8_t flags, int priority, bool a5);
 	int getFreeSlot(int a2);
 	void soundStop();
 	void stopSound(int resID, bool fadeOut);
-	bool isSoundPlaying(__int16 resID);
+	bool isSoundPlaying(int16_t resID);
 	void updateVolume();
-	void playCombatSound(__int16 resID, unsigned __int8 flags, int priority);
+	void playCombatSound(int16_t resID, uint8_t flags, int priority);
 	bool cacheCombatSound(int resID);
 	void freeMonsterSounds();
 

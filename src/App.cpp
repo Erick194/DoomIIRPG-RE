@@ -341,7 +341,11 @@ void Applet::Error(const char* fmt, ...) {
 	char errMsg[256];
 	va_list ap;
 	va_start(ap, fmt);
+#ifdef _WIN32
 	vsprintf_s(errMsg, sizeof(errMsg), fmt, ap);
+#else
+	vsnprintf(errMsg, sizeof(errMsg), fmt, ap);
+#endif
 	va_end(ap);
 
 	SDL_SetWindowFullscreen(CAppContainer::getInstance()->sdlGL->window, 0);
@@ -566,7 +570,7 @@ void Applet::AccelerometerUpdated(float x, float y, float z) {
 	this->accelerationZ[this->accelerationIndex] = z;
 	this->accelerationIndex = (this->accelerationIndex + 1) % 32;
 
-	int v7 = (unsigned __int8)this->field_0x291;
+	int v7 = (uint8_t)this->field_0x291;
 	int v8 = v7 == 0;
 	if (!v7) {
 		v8 = this->accelerationIndex == 0;

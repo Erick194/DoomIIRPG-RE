@@ -2385,7 +2385,7 @@ void Render::setupPalette(uint16_t* spanPalette, int renderMode, int renderFlags
 			//int n3 = ((n2 & 0xFF) + (n2 >> 8 & 0xFF) + (n2 >> 16 & 0xFF)) / 3;
 			//array[i] = (n3 << 16 | n3 << 8 | n3);
 
-			//__int64 v10 = 0x55555556 * (__int64)(LOBYTE(*(uint16_t*)&spanPalette[i]) + HIBYTE(*(uint16_t*)&spanPalette[i]));
+			//int64_t v10 = 0x55555556 * (int64_t)(LOBYTE(*(uint16_t*)&spanPalette[i]) + HIBYTE(*(uint16_t*)&spanPalette[i]));
 			//array[i] = (uint16_t)((int)v10 << 8) | (uint16_t)v10;
 
 			uint16_t grayColor = (((n2 & 0xf800) >> 10) + ((n2 >> 5) & 0x3f) + ((n2 & 0x1f) << 1)) / 3; //RGB
@@ -2601,8 +2601,8 @@ void Render::drawSkyMap(int n2) {
 
 	uint8_t* p_skyMapTexels; // r4
 	uint16_t* FogPalette; // r0
-	__int16 v7; // r2
-	__int16 v9; // r12
+	int16_t v7; // r2
+	int16_t v9; // r12
 	int v11; // lr
 	int v12; // r5
 	int v13; // r12
@@ -3630,8 +3630,8 @@ void Render::renderSpriteAnim(int n, int frame, int x, int y, int z, int tileNum
 
 	if (tileNum == Enums::TILENUM_BOSS_CYBERDEMON && scaleFactor > 0x10000) {
 		//printf("scaleFactor %x\viewPitch", scaleFactor);
-		__int64 v16 = 7 * scaleFactor;
-		__int64 v13 = (unsigned __int64)(v16 * (__int64)0x38E38E39) >> 32;
+		int64_t v16 = 7 * scaleFactor;
+		int64_t v13 = (uint64_t)(v16 * (int64_t)0x38E38E39) >> 32;
 		scaleFactor = (int)((v13 >> 1) - (v16 >> 31));
 		//printf("->scaleFactor %x\viewPitch", scaleFactor);
 	}

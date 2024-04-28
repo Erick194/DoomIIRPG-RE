@@ -1,10 +1,13 @@
-cmake_minimum_required(VERSION 3.25)
+cmake_minimum_required(VERSION 3.22)
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake/Modules")
 
 project(DoomIIRPG)
 
 if(MSVC)
 	add_definitions("/D_CRT_SECURE_NO_WARNINGS")
+endif()
+if(UNIX)
+	add_definitions("-Wno-write-strings")
 endif()
 
 find_package(SDL2 REQUIRED)

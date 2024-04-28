@@ -767,7 +767,7 @@ void gles::CreateTextureForMediaID(int n, int mediaID, bool b) {
 	int v5; // r1
 	int v7; // r8
 	char v8; // r1
-	unsigned __int16* v9; // r4
+	uint16_t* v9; // r4
 	unsigned int v10; // r3
 	unsigned int v12; // r2
 	int v13; // r11
@@ -793,7 +793,7 @@ void gles::CreateTextureForMediaID(int n, int mediaID, bool b) {
 	uint8_t* v45; // r3
 	uint8_t* v46; // r1
 	bool v47; // r4
-	__int16* v48; // r2
+	int16_t* v48; // r2
 	int v54; // lr
 	uint8_t* v55; // r2
 	int v58; // r1

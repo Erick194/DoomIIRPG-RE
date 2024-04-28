@@ -1,6 +1,8 @@
 #ifndef __TINYGL_H__
 #define __TINYGL_H__
 
+#include <climits>
+
 #include "Span.h"
 #include "TGLVert.h"
 #include "TGLEdge.h"

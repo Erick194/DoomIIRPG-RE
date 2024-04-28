@@ -177,7 +177,7 @@ void Sound::openAL_PlaySound(ALuint source, ALint loop) {
 void Sound::openAL_LoadSound(int resID, Sound::SoundStream* channel) {
 	ALenum error;
 	printf("openAL_LoadSound... resID: %d buffer: %d\n", resID, channel->bufferId);
-	int index = (unsigned __int16)(resID - 1000);
+	int index = (uint16_t)(resID - 1000);
 	OpenAL_ERROR(596);
 
 	printf("Loading sound...\nName: %s\nResourceID: %d\nAL buffer: %d\n", Sounds::RESOURCE_FILE_NAMES[index], resID, channel->bufferId);
@@ -303,7 +303,7 @@ bool Sound::cacheSounds() {
 	return false;
 }
 
-void Sound::playSound(__int16 resID, unsigned __int8 flags, int priority, bool a5) {
+void Sound::playSound(int16_t resID, uint8_t flags, int priority, bool a5) {
 	ALenum error;
 
 	int v5; // r5
@@ -486,7 +486,7 @@ void Sound::stopSound(int resID, bool fadeOut) {
 			if (fadeOut) {
 				if (!this->channel[i].fadeInProgress)
 				{
-					if ((unsigned int)((__int16)resID - 1067) > 4)
+					if ((unsigned int)((int16_t)resID - 1067) > 4)
 						volume = this->soundFxVolume;
 					else
 						volume = this->musicVolume;
@@ -503,7 +503,7 @@ void Sound::stopSound(int resID, bool fadeOut) {
 	}
 }
 
-bool Sound::isSoundPlaying(__int16 resID) {
+bool Sound::isSoundPlaying(int16_t resID) {
 	for (int i = 0; i < 10; i++) {
 		if (this->channel[i].resID == resID) {
 			return this->openAL_IsPlaying(this->channel[i].sourceId);
@@ -532,7 +532,7 @@ void Sound::updateVolume() {
 	}
 }
 
-void Sound::playCombatSound(__int16 resID, unsigned __int8 flags, int priority) {
+void Sound::playCombatSound(int16_t resID, uint8_t flags, int priority) {
 	this->playSound(resID, flags, priority, false);
 }
 

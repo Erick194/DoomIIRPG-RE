@@ -13,7 +13,11 @@ void Error(const char* fmt, ...)
 	char errMsg[256];
 	va_list ap;
 	va_start(ap, fmt);
+#ifdef _WIN32
 	vsprintf_s(errMsg, sizeof(errMsg), fmt, ap);
+#else
+	vsnprintf(errMsg, sizeof(errMsg), fmt, ap);
+#endif
 	va_end(ap);
 
 	printf("%s", errMsg);
