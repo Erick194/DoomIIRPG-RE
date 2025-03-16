@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include <SDL.h>
 #include "ZipFile.h"
 #include "SDLGL.h"
 
@@ -71,7 +72,7 @@ static int16_t _ReadShort(FILE* fp)
 		fread(&sData, sizeof(int16_t), 1, fp);
 	}
 
-	return sData;
+	return SDL_SwapLE16(sData);
 }
 
 static int32_t _ReadInt(FILE* fp)
@@ -82,7 +83,7 @@ static int32_t _ReadInt(FILE* fp)
 		fread(&iData, sizeof(int32_t), 1, fp);
 	}
 
-	return iData;
+	return SDL_SwapLE32(iData);
 }
 
 ZipFile::ZipFile() {
