@@ -175,16 +175,16 @@ Image* Applet::createImage(InputStream* inputStream, bool isTransparentMask)
 	img->piDIB->pRGB565 = nullptr;
 
 	// read header
-	inputStream->cursor += 10;
+    inputStream->offsetCursor(10);
 	offBeg = inputStream->readInt();
-	inputStream->cursor += 4;
+    inputStream->offsetCursor(4);
 	Width = inputStream->readInt();
 	Height = inputStream->readInt();
-	inputStream->cursor += 2;
+    inputStream->offsetCursor(2);
 	BitsPerPixel = inputStream->readShort();
-	inputStream->cursor += 16;
+    inputStream->offsetCursor(16);
 	ColorsUsed = inputStream->readInt();
-	inputStream->cursor += 4;
+    inputStream->offsetCursor(4);
 
 	//printf("offBeg %d\n", offBeg);
 	//printf("Width %d\n", Width);
@@ -207,8 +207,8 @@ Image* Applet::createImage(InputStream* inputStream, bool isTransparentMask)
 		img->piDIB->pRGB565 = (uint16_t*)std::malloc(img->piDIB->cntRGB * sizeof(uint16_t));
 
 		// read palette
-		std::memcpy(img->piDIB->pRGB888, inputStream->data + inputStream->cursor, img->piDIB->cntRGB * sizeof(uint32_t));
-		inputStream->cursor += (img->piDIB->cntRGB * sizeof(uint32_t));
+		std::memcpy(img->piDIB->pRGB888, inputStream->getTop(), img->piDIB->cntRGB * sizeof(uint32_t));
+		inputStream->offsetCursor(img->piDIB->cntRGB * sizeof(uint32_t));
 
 		img->isTransparentMask = isTransparentMask;
 
@@ -281,7 +281,7 @@ Image* Applet::createImage(InputStream* inputStream, bool isTransparentMask)
 		}
 		img->depth = img->piDIB->depth;
 
-		uint8_t *data = inputStream->data + inputStream->cursor;
+		uint8_t *data = inputStream->getTop();
 		if (bVar7) {
 			for (; Width < Height; Width = Width + 1) {
 				std::memcpy(img->piDIB->pBmp + img->piDIB->pitch * Width, data + iVar8 * (Height + (-1 - Width)),
@@ -294,7 +294,7 @@ Image* Applet::createImage(InputStream* inputStream, bool isTransparentMask)
 				Width = Width - 1;
 			}
 		}
-		inputStream->cursor = iVar8 * Height + inputStream->cursor;
+		inputStream->offsetCursor(iVar8 * Height);
 
 		if ((short)BitsPerPixel == 4) {
 			uint8_t* pbVar4 = (uint8_t*)std::malloc(sVar6);

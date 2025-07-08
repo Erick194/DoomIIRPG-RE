@@ -33,7 +33,7 @@ typedef unsigned long DWORD_PTR;
 
 
 bool getFileMD5Hash(void* data, uint64_t numBytes, uint64_t& hashWord1, uint64_t& hashWord2);
-bool checkFileMD5Hash(void* data, uint64_t numBytes, uint64_t checkHashWord1, uint64_t checkHashWord2);
+bool checkFileMD5Hash(const void* data, uint64_t numBytes, uint64_t checkHashWord1, uint64_t checkHashWord2);
 bool pointInRectangle(int x, int y, int rectX, int rectY, int rectW, int rectH);
 float AxisHit(int aX, int aY, int x, int y, int w, int h, bool isXaxis, float activeFraction);
 void fixImage(Image* img);

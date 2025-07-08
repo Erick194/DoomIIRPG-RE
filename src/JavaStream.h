@@ -17,24 +17,28 @@ class Applet;
 class InputStream
 {
 private:
-
+    
+    int field_0x0;
+    int field_0x4;
+    
+    uint32_t cursor;
+    FILE* file;
+    int fileSize;
+    int field_0x28;
+    
 public:
 	static constexpr int LOADTYPE_RESOURCE = 5;
 	static constexpr int LOADTYPE_FILE = 6;
-
-	int field_0x0;
-	int field_0x4;
-	uint8_t* data;
-	int cursor;
-	FILE* file;
-	int fileSize;
-	int field_0x28;
-
+    uint8_t* data;
+    
 	// Constructor
 	InputStream();
 	// Destructor
 	~InputStream();
-
+    uint8_t* getTop();
+    const uint8_t* getData();
+    int getFileSize();
+    void offsetCursor(int offset);
 	bool startup();
 	bool loadResource(const char* fileName);
 	bool loadFile(const char* fileName, int loadType);
@@ -55,20 +59,20 @@ public:
 class OutputStream
 {
 private:
-
+    uint8_t* getTop();
+    bool canWrite(int typeSizeof);
+    bool isOpen;
+    FILE* file;
+    uint8_t* buffer;
+    uint32_t written;
+    uint8_t* writeBuff;
+    int field_0x24_;
+    int fileSize;
+    int flushCount;
+    bool noWrite;
+    Applet* App;
+    
 public:
-
-	bool isOpen;
-	FILE* file;
-	uint8_t* buffer;
-	int written;
-	uint8_t* writeBuff;
-	int field_0x24_;
-	int fileSize;
-	int flushCount;
-	bool noWrite;
-	Applet* App;
-
 	// Constructor
 	OutputStream();
 	// Destructor

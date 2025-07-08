@@ -9,7 +9,7 @@
 #include "Canvas.h"
 #include "Graphics.h"
 
-bool getFileMD5Hash(void* data, uint64_t numBytes, uint64_t& hashWord1, uint64_t& hashWord2) {
+bool getFileMD5Hash(const void* data, uint64_t numBytes, uint64_t& hashWord1, uint64_t& hashWord2) {
 
     if((data == nullptr) || (numBytes == 0))
         return false;
@@ -35,7 +35,7 @@ bool getFileMD5Hash(void* data, uint64_t numBytes, uint64_t& hashWord1, uint64_t
 	return true;
 }
 
-bool checkFileMD5Hash(void* data, uint64_t numBytes, uint64_t checkHashWord1, uint64_t checkHashWord2) {
+bool checkFileMD5Hash(const void* data, uint64_t numBytes, uint64_t checkHashWord1, uint64_t checkHashWord2) {
     uint64_t actualHashWord1 = {};
     uint64_t actualHashWord2 = {};
 
