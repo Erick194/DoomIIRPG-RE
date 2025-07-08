@@ -1,5 +1,6 @@
 #include <stdexcept>
 #include <assert.h>
+#include <algorithm>
 
 #include "SDLGL.h"
 #include "App.h"
