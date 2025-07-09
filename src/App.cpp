@@ -207,8 +207,12 @@ Image* Applet::createImage(InputStream* inputStream, bool isTransparentMask)
 		img->piDIB->pRGB565 = (uint16_t*)std::malloc(img->piDIB->cntRGB * sizeof(uint16_t));
 
 		// read palette
-		std::memcpy(img->piDIB->pRGB888, inputStream->getTop(), img->piDIB->cntRGB * sizeof(uint32_t));
+		std::memcpy(img->piDIB->pRGB888, inputStream->data + inputStream->cursor, img->piDIB->cntRGB * sizeof(uint32_t));
+		for (uint32_t i = 0; i < img->piDIB->cntRGB; i++) {
+			img->piDIB->pRGB888[i] = SDL_SwapLE32(img->piDIB->pRGB888[i]);
+		}
 		inputStream->offsetCursor(img->piDIB->cntRGB * sizeof(uint32_t));
+
 
 		img->isTransparentMask = isTransparentMask;
 
