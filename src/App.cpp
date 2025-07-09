@@ -1,4 +1,7 @@
 #include <stdexcept>
+#include <cstdio>
+#include <algorithm>
+
 #include "SDLGL.h"
 #include "ZipFile.h"
 

@@ -1,4 +1,5 @@
 #include <stdexcept>
+#include <cstdio>
 
 #include "JavaStream.h"
 #include "CAppContainer.h"

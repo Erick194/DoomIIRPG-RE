@@ -2,7 +2,7 @@
 #define __JAVASTREAM_H__
 
 #include <stdint.h>
-
+#include <stdio.h>
 #define LT_RESOURCE 5
 #define LT_FILE		6
 #define LT_SOUND_RESOURCE	7 // [GEC]

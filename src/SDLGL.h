@@ -3,8 +3,6 @@
 
 #include <SDL.h>
 #include <SDL_opengl.h>
-#include <SDL_opengles2.h>
-#include <GL/gl.h>
 
 typedef struct SDLResVidModes_s {
 	int width, height;
