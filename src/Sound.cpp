@@ -213,19 +213,19 @@ bool Sound::openAL_LoadAudioFileData(const char* fileName, ALenum* format, ALvoi
 	char buffer[4];
 
 	if (this->openAL_OpenAudioFile(fileName, &IS)) {
-		*(int*)buffer = IS.readInt();
+		IS.read((uint8_t*)buffer, 0, 4);
 		if (strncmp(buffer, "RIFF", 4) != 0) {
 			this->app->Error("Not a valid WAV file, RIFF not found in header\n!");
 		}
 
 		IS.readInt(); // size of file
 
-		*(int*)buffer = IS.readInt();
+		IS.read((uint8_t*)buffer, 0, 4);
 		if (strncmp(buffer, "WAVE", 4) != 0) {
 			this->app->Error("Not a valid WAV file, WAVE not found in header\n!");
 		}
 
-		*(int*)buffer = IS.readInt();
+		IS.read((uint8_t*)buffer, 0, 4);
 		if (strncmp(buffer, "fmt ", 4) != 0) {
 			this->app->Error("Not a valid WAV file, Format Marker not found in header\n!");
 		}
