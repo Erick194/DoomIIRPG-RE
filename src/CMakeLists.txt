@@ -22,5 +22,9 @@ set_target_properties(${PROJECT_NAME} PROPERTIES
     CXX_EXTENSIONS OFF
 )
 
-target_include_directories(${PROJECT_NAME} PUBLIC ${OPENAL_INCLUDE_DIR})
-target_link_libraries(${PROJECT_NAME} SDL2::SDL2 ZLIB::ZLIB ${OPENAL_LIBRARY} ${OPENGL_LIBRARIES} ${HASH_LIBRARY_TGT_NAME})
+target_link_libraries(${PROJECT_NAME}
+	SDL2::SDL2
+	ZLIB::ZLIB
+	OpenAL::OpenAL
+	OpenGL::GL
+	${HASH_LIBRARY_TGT_NAME})
