@@ -6,6 +6,24 @@
 #include "App.h"
 #include "ZipFile.h"
 
+namespace {
+    template<typename T>
+    T readData(const uint8_t* data, uint32_t& cursor)
+    {
+        T value;
+        std::memcpy(&value, data, sizeof(T));
+        cursor += sizeof(T);
+        return value;
+    }
+
+    template<typename T>
+    void writeData(T data, uint8_t* stream, uint32_t& cursor)
+    {
+        std::memcpy(stream, &data, sizeof(T));
+        cursor += sizeof(T);
+    }
+}
+
 // ------------------
 // InputStream Class
 // ------------------
@@ -30,6 +48,19 @@ InputStream::~InputStream() {
 		std::free(this->data);
 		this->data = nullptr;
 	}
+}
+
+void InputStream::offsetCursor(int offset)
+{
+    this->cursor += offset;
+}
+
+const uint8_t* InputStream::getData() {
+    return this->data;
+}
+
+int InputStream::getFileSize() {
+    return this->fileSize;
 }
 
 bool InputStream::loadResource(const char* fileName)
@@ -102,50 +133,38 @@ void InputStream::close() {
 	}
 }
 
+uint8_t* InputStream::getTop() {
+    return &this->data[this->cursor];
+};
+
 int InputStream::readInt()
 {
-	int ch1 = this->data[this->cursor + 3];
-	int ch2 = this->data[this->cursor + 2];
-	int ch3 = this->data[this->cursor + 1];
-	int ch4 = this->data[this->cursor + 0];
-	this->cursor += sizeof(int32_t);
-	return (int) ((ch1 << 24 & 0xFF000000) + (ch2 << 16 & 0xFF0000) + (ch3 << 8 & 0xFF00) + (ch4 << 0 & 0xFF));
+    return readData<int32_t>(this->getTop(), this->cursor);
 }
 
 int InputStream::readShort()
 {
-	int ch1 = this->data[this->cursor + 1];
-	int ch2 = this->data[this->cursor + 0];
-	this->cursor += sizeof(int16_t);
-	return (int)((ch1 << 8 & 0xFF00) + (ch2 << 0 & 0xFF));
+    return readData<int16_t>(this->getTop(), this->cursor);
 }
 
 bool InputStream::readBoolean()
 {
-	uint8_t ch1 = this->data[this->cursor + 0];
-	this->cursor += sizeof(int8_t);
-	return (bool)((ch1 != 0) ? true : false);
+    return readData<uint8_t>(this->getTop(), this->cursor) != 0;
 }
 
 uint8_t InputStream::readByte()
 {
-	uint8_t ch1 = this->data[this->cursor + 0];
-	this->cursor += sizeof(int8_t);
-	return ch1;
+    return readData<uint8_t>(this->getTop(), this->cursor);
 }
 
 uint8_t InputStream::readUnsignedByte()
 {
-	uint8_t ch1 = this->data[this->cursor + 0];
-	this->cursor += sizeof(int8_t);
-	return ch1;
+    return readData<uint8_t>(this->getTop(), this->cursor);
 }
 
 int InputStream::readSignedByte()
 {
-	uint8_t ch1 = this->data[this->cursor + 0];
-	this->cursor += sizeof(int8_t);
-	return (int)((char)ch1);
+    return (int)readData<int8_t>(this->getTop(), this->cursor);
 }
 
 void InputStream::read(uint8_t* dest, int off, int size) {
@@ -153,7 +172,7 @@ void InputStream::read(uint8_t* dest, int off, int size) {
 		if (this->cursor >= this->fileSize) {
 			break;
 		}
-		dest[off + i] = this->data[this->cursor + 0];
+		dest[off + i] = this->data[this->cursor];
 		this->cursor++;
 	}
 }
@@ -250,6 +269,21 @@ int OutputStream::openFile(const char* fileName, int openMode) {
 	return 0;
 }
 
+uint8_t* OutputStream::getTop()
+{
+    return &this->buffer[this->written];
+}
+
+bool OutputStream::canWrite(int typeSizeof)
+{
+    if ((256U - this->written) < typeSizeof) {
+        if (this->flush() == 0) {
+            return false;
+        }
+    }
+    return true;
+}
+
 void OutputStream::close()
 {
 	this->flush();
@@ -284,55 +318,42 @@ int OutputStream::flush()
 
 void OutputStream::writeInt(int i)
 {
-	if ((256 - this->written) < sizeof(uint32_t)) {
-		if (this->flush() == 0) {
-			return;
-		}
-	}
-
-	this->buffer[this->written++] = (uint8_t)(i & 0xFF);
-	this->buffer[this->written++] = (uint8_t)(i >> 8 & 0xFF);
-	this->buffer[this->written++] = (uint8_t)(i >> 16 & 0xFF);
-	this->buffer[this->written++] = (uint8_t)(i >> 24 & 0xFF);
+    if(!this->canWrite(sizeof(i))) {
+        return;
+    }
+    
+    writeData(i, this->getTop(), this->written);
 }
 
 void OutputStream::writeShort(int16_t i)
 {
-	if ((256U - this->written) < sizeof(uint16_t)) {
-		if (this->flush() == 0) {
-			return;
-		}
-	}
+    if(!this->canWrite(sizeof(i))) {
+        return;
+    }
 
-	this->buffer[this->written++] = (uint8_t)(i & 0xFF);
-	this->buffer[this->written++] = (uint8_t)(i >> 8 & 0xFF);
+    writeData(i, this->getTop(), this->written);
 }
 
 void OutputStream::writeByte(uint8_t i)
 {
-	if ((256U - this->written) < sizeof(uint8_t)) {
-		if (this->flush() == 0) {
-			return;
-		}
-	}
+    if(!this->canWrite(sizeof(i))) {
+        return;
+    }
 
-	this->buffer[this->written++] = (uint8_t)(i & 0xFF);
+    writeData(i, this->getTop(), this->written);
 }
 
 void OutputStream::writeBoolean(bool b)
 {
-	if ((256U - this->written) < sizeof(uint8_t)) {
-		if (this->flush() == 0) {
-			return;
-		}
-	}
-
-	this->buffer[this->written++] = (uint8_t)(b);
+    if(!this->canWrite(sizeof(uint8_t))) {
+        return;
+    }
+    writeData((uint8_t)b, this->getTop(), this->written);
 }
 
 void OutputStream::write(uint8_t* buff, int off, int size)
 {
-	int _written = this->written;
+	const int& _written = this->written;
 	if ((uint32_t)(_written + size) >= 256) {
 		int count = 256 - _written;
 		std::memcpy(&this->buffer[_written], &buff[off], count);

@@ -60,7 +60,7 @@ public:
     void writeMarker(OutputStream* OS, int i);
     void writeMarker(OutputStream* OS);
     void read(InputStream* IS, int i);
-    void bufSkip(InputStream* IS, int off, bool updateLB);
+    void bufSkip(InputStream* IS, int offset, bool updateLB);
     uint8_t byteAt(int i);
     uint8_t shiftByte();
     short UByteAt(int i);

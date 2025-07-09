@@ -395,7 +395,7 @@ void Render::FinalizeMedia() {
 	}
 
 	// [GEC]: Verifica los datos del las palletas y se corrigen datos si es necesario
-	if (checkFileMD5Hash(IS.data, IS.fileSize, 0xFFE7C84C143EA906, 0xF93B1383F6B2510E)) {
+	if (checkFileMD5Hash(IS.getData(), IS.getFileSize(), 0xFFE7C84C143EA906, 0xF93B1383F6B2510E)) {
 		// WATER STREAM Palette
 		IS.data[266852] = 0;
 		IS.data[266853] = 0;
